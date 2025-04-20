@@ -7,6 +7,7 @@ import (
 // add er in the last 
 type paymenter interface{
 	pay(amount float32)
+	refund(amount float32,account string)
 } 
 
 
@@ -16,10 +17,10 @@ type payment struct {
 }
 
 func (p payment) makePayment(amount float32){
-// razorpaymentlink:= razorpay{}
-// stripepayment:= stripe{}
-// razorpaymentlink.pay(amount)
 p.gateway.pay(amount)
+}
+func (p payment) refundinitiation(amount float32, account string){
+	p.gateway.refund(amount,account)
 }
 type razorpay struct {}
 func  (r razorpay) pay(amount float32){
@@ -35,12 +36,21 @@ func (f fakepayment) pay(amount float32){
 	fmt.Println("making payment using fake payment gatway!!!");
 }
 
+type paypal struct{}
+func (p paypal) pay(amount float32){
+	fmt.Println("making payment using paypal payment gateway",amount);
+}
+func (p paypal) refund(amount float32 , account string){
+	fmt.Printf("refund of %v has been initiated to accound-id %v \n",amount,account)
+}
 func main() {
-	fakepaymentgateway:= fakepayment{}
+	// fakepaymentgateway:= fakepayment{}
 	// razorpaymentlink:= razorpay{} 
+	paypalpaymentLink:= paypal{}
 	newPayment:= payment{
-		gateway: fakepaymentgateway,
+		gateway: paypalpaymentLink,
 	}
-	newPayment.makePayment(100)
+	newPayment.makePayment(100);
+	newPayment.refundinitiation(400,"123453")
 	fmt.Println("Shortcut triggered! 🟢")
 }
