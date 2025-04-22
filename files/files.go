@@ -2,6 +2,8 @@ package main
 
 import (
 	// "fmt"
+	"bufio"
+	"fmt"
 	"os"
 )
 
@@ -50,8 +52,35 @@ func main() {
 	// bytes:= []byte("hello gokang")
 	// f.Write(bytes)
 
-	//tranfeer file data to other file 
+	//tranfer file data to other file 
 	//in streaming fashion
 
-	
+	sourceFile,err:= os.Open("sex.txt")
+	if err != nil{
+		panic(err)
+	}
+	defer sourceFile.Close()
+	destFile,err:= os.Create("exm.txt")
+	if err!=nil{
+		panic(err)
+	}
+	defer destFile.Close()
+	reader:= bufio.NewReader(sourceFile)
+	writer:= bufio.NewWriter(destFile)
+
+	for {
+		b,err:=reader.ReadByte()
+		if err !=nil{
+			if err.Error()!= "EOF"{
+				panic(err)
+			}
+			break
+		}
+		er:=writer.WriteByte(b)
+		if er!=nil{
+			panic(er)
+		}
+	}
+	writer.Flush()
+	fmt.Println("successfully return to new file")
 }
