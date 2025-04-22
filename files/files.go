@@ -2,7 +2,7 @@ package main
 
 import (
 	// "fmt"
-	"bufio"
+	// "bufio"
 	"fmt"
 	"os"
 )
@@ -55,32 +55,38 @@ func main() {
 	//tranfer file data to other file 
 	//in streaming fashion
 
-	sourceFile,err:= os.Open("sex.txt")
-	if err != nil{
-		panic(err)
-	}
-	defer sourceFile.Close()
-	destFile,err:= os.Create("exm.txt")
-	if err!=nil{
-		panic(err)
-	}
-	defer destFile.Close()
-	reader:= bufio.NewReader(sourceFile)
-	writer:= bufio.NewWriter(destFile)
+	// sourceFile,err:= os.Open("sex.txt")
+	// if err != nil{
+	// 	panic(err)
+	// }
+	// defer sourceFile.Close()
+	// destFile,err:= os.Create("exm.txt")
+	// if err!=nil{
+	// 	panic(err)
+	// }
+	// defer destFile.Close()
+	// reader:= bufio.NewReader(sourceFile)
+	// writer:= bufio.NewWriter(destFile)
 
-	for {
-		b,err:=reader.ReadByte()
-		if err !=nil{
-			if err.Error()!= "EOF"{
-				panic(err)
-			}
-			break
-		}
-		er:=writer.WriteByte(b)
-		if er!=nil{
-			panic(er)
-		}
+	// for {
+	// 	b,err:=reader.ReadByte()
+	// 	if err !=nil{
+	// 		if err.Error()!= "EOF"{
+	// 			panic(err)
+	// 		}
+	// 		break
+	// 	}
+	// 	er:=writer.WriteByte(b)
+	// 	if er!=nil{
+	// 		panic(er)
+	// 	}
+	// }
+	// writer.Flush()
+
+	err:=os.Remove("exm.txt")
+	if err !=nil {
+		panic(err)
 	}
-	writer.Flush()
+
 	fmt.Println("successfully return to new file")
 }
