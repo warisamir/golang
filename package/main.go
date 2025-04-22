@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/warisamir/golang/user"
+	"github.com/fatih/color"
 	"github.com/warisamir/golang/auth"
+	"github.com/warisamir/golang/user"
 )
 
 func main() {
@@ -16,5 +17,6 @@ func main() {
 		Email: "User@gmail.com",
 		Name:  "john wick",
 	}
-	fmt.Println(user.Email,user.Name)
+	c:=color.New(color.FgHiGreen).Add(color.BgHiYellow)
+	c.Println(user.Email,user.Name)
 } 

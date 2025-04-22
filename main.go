@@ -1,7 +1,4 @@
 package main
-import(
-	"fmt"package main
-	
 	import (
 		"fmt"
 		"os"
@@ -14,7 +11,4 @@ import(
 		defer f.Close()
 		f.WriteString(fmt.Sprintf("Triggered at %v\n", time.Now()))
 	}
-)
-func main(){
-	fmt.Println("hello world")
-}
+
